@@ -7,9 +7,16 @@ export default function QueryProcessor(query: string): string {
     );
   }
 
-  if (query.toLowerCase().includes("what is 37 plus 42") || 
-      (query.toLowerCase().includes("what is") && query.includes("37") && query.includes("plus") && query.includes("42"))) {
-    return "79";
+  if (query.toLowerCase().includes("what is") && query.toLowerCase().includes("plus")) {
+    // Extract all numbers from the query
+    const numbers = query.match(/\d+/g);
+    if (numbers && numbers.length === 2) {
+      // Convert to integers and add them
+      const num1 = parseInt(numbers[0], 10);
+      const num2 = parseInt(numbers[1], 10);
+      const sum = num1 + num2;
+      return sum.toString();
+    }
   }
 
   if (query.toLowerCase().includes("which of the following numbers is the largest")) {
